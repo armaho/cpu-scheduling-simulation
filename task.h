@@ -7,6 +7,8 @@ typedef struct {
   int duration;
   int arrivalTime;
   char *name;
+  int remaining;
+  bool hasExecuted;
 } Task;
 
 typedef struct {
@@ -15,6 +17,7 @@ typedef struct {
   Task *buff;
 } TaskList;
 
+void initTask(Task *task, int duration, int arrivalTime, char *name);
 int initTaskList(TaskList *taskList);
 void freeTaskList(TaskList *taskList);
 int addTaskList(TaskList *taskList, Task task);

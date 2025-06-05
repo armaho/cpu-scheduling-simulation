@@ -8,7 +8,13 @@ typedef struct {
   Scheduler *scheduler;
 } CPU;
 
+typedef struct {
+  float avgResponseTime;
+  float avgWaitingTime;
+  float avgTurnaroundTime;
+} SimResult;
+
 void initCPU(CPU *cpu, Scheduler *scheduler);
-void runCPU(CPU *cpu);
+SimResult runCPU(CPU *cpu);
 
 #endif

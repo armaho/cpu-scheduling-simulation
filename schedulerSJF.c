@@ -20,10 +20,10 @@ SchedulerResponse scheduleSJF(Scheduler *scheduler) {
     Task *t = &(scheduler->taskList.buff[i]);
 
     if (t->arrivalTime < scheduler->currentTime &&
-        t->duration > 0 && 
-        t->duration < shortestDuration) {
+        t->remaining > 0 && 
+        t->remaining < shortestDuration) {
       shortestTask = t;
-      shortestDuration = t->duration;
+      shortestDuration = t->remaining;
     }
   }
 

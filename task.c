@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #include "task.h"
 
@@ -16,6 +17,14 @@ static int increaseCap(TaskList *taskList) {
   taskList->cap = newCap;
 
   return 0;
+}
+
+void initTask(Task *task, int duration, int arrivalTime, char *name) {
+  task->duration = duration;
+  task->arrivalTime = arrivalTime;
+  task->name = name;
+  task->remaining = duration;
+  task->hasExecuted = false;
 }
 
 int initTaskList(TaskList *taskList) {
@@ -44,7 +53,7 @@ int addTaskList(TaskList *taskList, Task task) {
 
 bool containsUnfinishedTask(TaskList *taskList) {
   for (int i = 0; i < taskList->size; i++) {
-    if (taskList->buff[i].duration > 0) {
+    if (taskList->buff[i].remaining > 0) {
       return true;
     }
   }

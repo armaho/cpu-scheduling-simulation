@@ -14,7 +14,7 @@ SchedulerResponse schedule(Scheduler *scheduler) {
 
   int cnt = 0;
   int newTask = (schedulerRR->lastTask + 1) % schedulerRR->taskList.size;
-  while ((schedulerRR->taskList.buff[newTask].duration <= 0 ||
+  while ((schedulerRR->taskList.buff[newTask].remaining <= 0 ||
       schedulerRR->taskList.buff[newTask].arrivalTime > schedulerRR->currentTime) &&
       cnt < schedulerRR->taskList.size) {
     newTask = (newTask + 1) % schedulerRR->taskList.size;
@@ -26,7 +26,7 @@ SchedulerResponse schedule(Scheduler *scheduler) {
   }
 
   Task *t = schedulerRR->taskList.buff + newTask;
-  int duration = t->duration < schedulerRR->quantum ? t->duration : schedulerRR->quantum;
+  int duration = t->remaining < schedulerRR->quantum ? t->remaining : schedulerRR->quantum;
 
   return (SchedulerResponse){.taskToRun = t, duration};
 }
